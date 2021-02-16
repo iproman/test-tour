@@ -32,4 +32,14 @@ export class HeroService {
   private log(message: string): void {
     this.messageService.add(`HeroService: ${message}`);
   }
+
+  private handleError<T>(operation = 'operation', result?: T): any {
+    return (error: any): Observable<T> => {
+      console.error(error);
+
+      this.log(`${operation} failed: ${error.message}`);
+
+      return of(result as T);
+    };
+  }
 }
